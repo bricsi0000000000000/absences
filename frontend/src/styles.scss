@@ -1,0 +1,27 @@
+@import 'app/styles/colors.scss';
+@import 'app/styles/fonts.scss';
+@import 'app/styles/buttons-styles.scss';
+
+body{
+  background-color: $background-color;
+  color: $text-color;
+}
+
+h1, h2{
+  font-family: TitleFont !important;
+
+  @media (max-width: 765px) {
+    text-align: center;
+  }
+}
+
+label{
+  font-family: TextFontRegular !important;
+}
+
+input, select, textarea{
+  background-color: white;
+  border-radius: 13px;
+  padding: 12px;
+  border: none;
+}

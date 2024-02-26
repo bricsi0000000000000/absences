@@ -1,0 +1,9 @@
+E:\szintezis\leave-times\Api\DataModel\bin\Debug\net6.0\DataModel.deps.json
+E:\szintezis\leave-times\Api\DataModel\bin\Debug\net6.0\DataModel.dll
+E:\szintezis\leave-times\Api\DataModel\obj\Debug\net6.0\DataModel.GeneratedMSBuildEditorConfig.editorconfig
+E:\szintezis\leave-times\Api\DataModel\obj\Debug\net6.0\DataModel.AssemblyInfoInputs.cache
+E:\szintezis\leave-times\Api\DataModel\obj\Debug\net6.0\DataModel.AssemblyInfo.cs
+E:\szintezis\leave-times\Api\DataModel\obj\Debug\net6.0\DataModel.csproj.CoreCompileInputs.cache
+E:\szintezis\leave-times\Api\DataModel\obj\Debug\net6.0\DataModel.dll
+E:\szintezis\leave-times\Api\DataModel\obj\Debug\net6.0\refint\DataModel.dll
+E:\szintezis\leave-times\Api\DataModel\obj\Debug\net6.0\ref\DataModel.dll

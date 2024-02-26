@@ -1,0 +1,117 @@
+$button-corner-radius: 13px;
+
+.primary-button {
+  border-radius: $button-corner-radius !important;
+  font-family: TextFontBold;
+  background: $primary-color;
+  color: white;
+  font-size: 16px;
+  padding: 16px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: 0.2s;
+  transition-timing-function: ease-in-out;
+  width: auto;
+  height: 52px !important;
+  border: none !important;
+
+  &:hover {
+    text-decoration: none;
+    background: $primary-hover-color;
+    cursor: pointer;
+  }
+
+  &:active {
+    background: $primary-active-color;
+  }
+
+  &:disabled {
+    background: $primary-disabled-color;
+    cursor: auto !important;
+  }
+
+  &:focus {
+    background: $primary-color !important;
+  }
+}
+
+.secondary-button {
+  border-radius: $button-corner-radius;
+  font-family: TextFontBold;
+  background-color: $secondary-color;
+  color: $text-color;
+  font-size: 14px;
+  padding: 7px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: 0.2s;
+  transition-timing-function: ease-in-out;
+  width: auto;
+  border: 3px solid $secondary-color;
+
+  &:hover {
+    border-color: $secondary-hover-color;
+    background-color: $secondary-hover-color !important;
+    cursor: pointer;
+  }
+
+  &:active {
+    border-color: $secondary-active-color;
+    background-color: $secondary-active-color !important;
+  }
+
+  &:disabled {
+    border-color: $secondary-disabled-color;
+    background-color: $secondary-disabled-color !important;
+    color: white;
+    cursor: auto !important;
+  }
+
+  &:focus {
+    border-color: transparent !important;
+    background-color: $secondary-active-color !important;
+  }
+}
+
+.delete-button {
+  border-radius: $button-corner-radius;
+  font-family: TextFontBold;
+  background-color: $delete-button-color;
+  color: white;
+  font-size: 14px;
+  padding: 7px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: 0.2s;
+  transition-timing-function: ease-in-out;
+  width: auto;
+  border: 3px solid $delete-button-color;
+
+  &:hover {
+    border-color: $delete-button-hover-color;
+    background-color: $delete-button-hover-color !important;
+    cursor: pointer;
+  }
+
+  &:active {
+    border-color: $delete-button-active-color;
+    background-color: $delete-button-active-color !important;
+  }
+
+  &:disabled {
+    border-color: $delete-button-disabled-color;
+    background-color: $delete-button-disabled-color !important;
+    cursor: auto !important;
+  }
+
+  &:focus {
+    border-color: transparent !important;
+    background-color: $delete-button-active-color !important;
+  }
+}

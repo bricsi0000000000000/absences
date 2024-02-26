@@ -1,0 +1,172 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1>Absences</h1>
+
+      <div class="filters-container">
+        <div class="filter">
+          <label for="start-date">Start Date</label>
+          <input name="start-date" type="month" value="{{currentYearAndMonth}}" (change)="onStartDateChange($event)">
+        </div>
+
+        <div class="filter">
+          <label for="end-date">End Date</label>
+          <input name="end-date" type="month" value="{{currentYearAndMonth}}" (change)="onEndDateChange($event)">
+        </div>
+
+        <button class="primary-button" (click)="openAbsencePopup()">New Absence</button>
+      </div>
+
+      <div *ngIf="isLoading; else loaded">
+        Loading..
+      </div>
+      <ng-template #loaded>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <td></td>
+                <td (click)="orderList('EmployeeName')">
+                  Name
+                  <span *ngIf="this.orderByColumnName == 'EmployeeName'">
+                    <i class="bi" [ngClass]="this.isOrderByDesc ? 'bi-sort-down' : 'bi-sort-up'"></i>
+                  </span>
+                </td>
+                <td (click)="orderList('StartDate')">
+                  Start Date
+                  <span *ngIf="this.orderByColumnName == 'StartDate'">
+                    <i class="bi" [ngClass]="this.isOrderByDesc ? 'bi-sort-down' : 'bi-sort-up'"></i>
+                  </span>
+                </td>
+                <td (click)="orderList('EndDate')">
+                  End Date
+                  <span *ngIf="this.orderByColumnName == 'EndDate'">
+                    <i class="bi" [ngClass]="this.isOrderByDesc ? 'bi-sort-down' : 'bi-sort-up'"></i>
+                  </span>
+                </td>
+                <td (click)="orderList('Reason')">
+                  Reason
+                  <span *ngIf="this.orderByColumnName == 'Reason'">
+                    <i class="bi" [ngClass]="this.isOrderByDesc ? 'bi-sort-down' : 'bi-sort-up'"></i>
+                  </span>
+                </td>
+                <td (click)="orderList('Comment')">
+                  Comment
+                  <span *ngIf="this.orderByColumnName == 'Comment'">
+                    <i class="bi" [ngClass]="this.isOrderByDesc ? 'bi-sort-down' : 'bi-sort-up'"></i>
+                  </span>
+                </td>
+                <td></td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let absence of absences">
+                <td>
+                  <span *ngIf="absence.isApproved; else notApprovedYet">
+                    Approved
+                  </span>
+                  <ng-template #notApprovedYet>
+                    <button class="secondary-button" (click)="editAbsence(absence.id)">
+                      <i class="bi bi-pencil"></i>
+                    </button>
+                  </ng-template>
+                </td>
+                <td>{{ absence.employeeName }}</td>
+                <td>{{ absence.startDate | dateToString }}</td>
+                <td>{{ absence.endDate | dateToString }}</td>
+                <td>{{ absence.reason | absenceReasonToString }}</td>
+                <td [title]="absence.comment" class="comment">{{ absence.comment }}</td>
+                <td>
+                  <button class="delete-button" (click)="deleteAbsence(absence.id)">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div *ngIf="absences.length == 0">
+          There are no absences in this time frame
+        </div>
+
+        <nav>
+          <ul class="pagination justify-content-end">
+            <li class="page-item" [class.disabled]="this.currentPageNumber <= 1">
+              <a class="page-link" aria-label="Previous" (click)="previousPage()">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item active">
+              <a class="page-link">{{ this.currentPageNumber }} / {{ pagesCount }}</a>
+            </li>
+            <li class="page-item" [class.disabled]="this.currentPageNumber >= this.pagesCount">
+              <a class="page-link" aria-label="Next" (click)="nextPage()">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="popup-container" #absencePopup>
+    <div class="popup-body">
+      <h2>{{ isEditing ? 'Edit absence': 'Add new absence'}}</h2>
+
+      <form [formGroup]="addNewAbsenceFormGroup" (ngSubmit)="addNewAbsence()">
+
+        <label>Employee name</label>
+        <input id="employee-name-input" type="text" formControlName="employeeName">
+        <div
+          *ngIf="addNewAbsenceFormGroup.get('employeeName')?.invalid && addNewAbsenceFormGroup.get('employeeName')?.touched"
+          class="error-messages-container">
+          <div class="error-message">Employee name is empty</div>
+        </div>
+
+        <label>Start date</label>
+        <input id="start-date-input" type="date" formControlName="startDate" (change)="checkEditAbsenceStartDate()">
+        <div
+          *ngIf="addNewAbsenceFormGroup.get('startDate')?.invalid && addNewAbsenceFormGroup.get('startDate')?.touched"
+          class="error-messages-container">
+          <div class="error-message">Start date is empty</div>
+        </div>
+        <div *ngIf="!isEditAbsenceStartDateValid" class="error-messages-container">
+          <div class="error-message">The start date should precede the end date</div>
+        </div>
+
+        <label>End date</label>
+        <input id="end-date-input" type="date" formControlName="endDate">
+        <div *ngIf="addNewAbsenceFormGroup.get('endDate')?.invalid && addNewAbsenceFormGroup.get('endDate')?.touched"
+          class="error-messages-container">
+          <div class="error-message">End date is empty</div>
+        </div>
+
+        <label>Reason</label>
+        <select formControlName="reason">
+          <option *ngFor="let reason of absenceReasons" [value]="reason.key">
+            {{ reason.value }}
+          </option>
+        </select>
+        <div *ngIf="addNewAbsenceFormGroup.get('reason')?.invalid && addNewAbsenceFormGroup.get('reason')?.touched"
+          class="error-messages-container">
+          <div class="error-message">Please select a reason</div>
+        </div>
+
+        <label>Comment</label>
+        <textarea id="comment-input" formControlName="comment" rows="2" cols="50"></textarea>
+
+        <div class="button-container">
+          <span class="secondary-button" (click)="hideAbsencePopup()">Cancel</span>
+          <button type="submit" class="primary-button">{{ isEditing ? 'Save' : 'Add' }}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast-container" #errorMessageToast>
+    {{errorMessage}}
+  </div>
+
+</div>
