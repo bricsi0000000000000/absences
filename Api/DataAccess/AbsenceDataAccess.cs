@@ -10,6 +10,7 @@ namespace DataAccess
             new()
             {
                 Id = 1,
+                EmployeeId = 1,
                 EmployeeName = "John Doe",
                 StartDate = new DateTime(2024, 2, 1),
                 EndDate = new DateTime(2024, 2, 3),
@@ -21,6 +22,7 @@ namespace DataAccess
             new()
             {
                 Id = 2,
+                EmployeeId = 2,
                 EmployeeName = "Alice Smith",
                 StartDate = new DateTime(2024, 3, 10),
                 EndDate = new DateTime(2024, 3, 15),
@@ -31,6 +33,7 @@ namespace DataAccess
             new()
             {
                 Id = 3,
+                EmployeeId = 3,
                 EmployeeName = "Bob Johnson",
                 StartDate = new DateTime(2024, 4, 20),
                 EndDate = new DateTime(2024, 4, 21),
@@ -41,6 +44,7 @@ namespace DataAccess
             new()
             {
                 Id = 4,
+                EmployeeId = 4,
                 EmployeeName = "Emily Brown",
                 StartDate = new DateTime(2024, 5, 5),
                 EndDate = new DateTime(2024, 5, 8),
@@ -51,6 +55,7 @@ namespace DataAccess
             new()
             {
                 Id = 5,
+                EmployeeId = 5,
                 EmployeeName = "Michael Wilson",
                 StartDate = new DateTime(2024, 6, 15),
                 EndDate = new DateTime(2024, 6, 17),
@@ -61,6 +66,7 @@ namespace DataAccess
             new()
             {
                 Id = 6,
+                EmployeeId = 6,
                 EmployeeName = "Emma Davis",
                 StartDate = new DateTime(2024, 7, 25),
                 EndDate = new DateTime(2024, 7, 30),
@@ -68,9 +74,10 @@ namespace DataAccess
                 Comment = "Family vacation",
                 IsApproved = true
             },
-               new()
+            new()
             {
                 Id = 7,
+                EmployeeId = 7,
                 EmployeeName = "Dave",
                 StartDate = new DateTime(2024,2,6),
                 EndDate = new DateTime(2024,2,14),
@@ -81,6 +88,7 @@ namespace DataAccess
             new()
             {
                 Id = 8,
+                EmployeeId = 8,
                 EmployeeName = "Alex",
                 StartDate = new DateTime(2024,2,14),
                 EndDate = new DateTime(2024,3,3),
@@ -149,7 +157,15 @@ namespace DataAccess
                 && x.EndDate.Year <= absence.EndDate.Year
                 && x.EndDate.Month <= absence.EndDate.Month) is null)
             {
-                absence.Id = absences.Last().Id + 1;
+                if (absences.Any())
+                {
+                    absence.Id = absences.Last().Id + 1;
+                }
+                else
+                {
+                    absence.Id = 1;
+                }
+
                 absences.Add(absence);
 
                 return new SuccessResponse<object>();

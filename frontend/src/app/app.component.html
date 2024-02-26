@@ -1,1 +1,10 @@
-<app-list-page></app-list-page>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    </ul>
+    <span class="logged-in-user-name" *ngIf="employeeName">Logged in as {{employeeName}}</span>
+    <button class="secondary-button" (click)="logOut()">Log out</button>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>

@@ -7,6 +7,9 @@ import { ListPageComponent } from './pages/list-page/list-page.component';
 import { AbsenceReasonToStringPipe } from './pipes/absenceReasonToStringPipe';
 import { DateToStringPipe } from './pipes/dateToString';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { AppRoutingModule} from './app-routing.module'
+import { CredentialManager } from '../@api/credential-manager';
 
 @NgModule({
   declarations: [
@@ -14,13 +17,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     ListPageComponent,
     AbsenceReasonToStringPipe,
     DateToStringPipe,
+    LoginPageComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
-  providers: [ApiService],
+  providers: [ApiService, CredentialManager],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

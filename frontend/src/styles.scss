@@ -25,3 +25,50 @@ input, select, textarea{
   padding: 12px;
   border: none;
 }
+
+input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    margin-top: 10px;
+    margin-bottom: 3px;
+  }
+
+  .error-message {
+    color: $error-color;
+  }
+
+  .button-container {
+    margin-top: 20px;
+    display: flex;
+
+    .primary-button {
+      width: 100%;
+    }
+
+    .secondary-button {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+  }
+}
+
+.toast-container {
+  z-index: 2;
+  background-color: white;
+  color: $error-color;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 20px;
+  margin-right: 8px;
+  margin-top: 8px;
+  border-radius: 20px;
+  display: none;
+}

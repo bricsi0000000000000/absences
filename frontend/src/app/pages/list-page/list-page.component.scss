@@ -74,54 +74,19 @@ table {
     border-radius: 20px;
     padding: 20px;
 
-    form {
-      display: flex;
-      flex-direction: column;
-
-      label {
-        margin-top: 10px;
-        margin-bottom: 3px;
-      }
-
-      .error-message {
-        color: $error-color;
-      }
-
-      .button-container {
-        margin-top: 20px;
-        display: flex;
-
-        .primary-button {
-          width: 100%;
-        }
-
-        .secondary-button {
-          margin-left: 20px;
-          margin-right: 20px;
-        }
-      }
-    }
-
     @media (max-width: 765px) {
       width: 100%;
     }
   }
 }
 
-.toast-container {
-  z-index: 2;
-  background-color: white;
-  color: $error-color;
-  position: fixed;
-  top: 0;
-  right: 0;
-  padding: 20px;
-  margin-right: 8px;
-  margin-top: 8px;
-  border-radius: 20px;
-  display: none;
-}
-
 .page-link {
   z-index: 0 !important;
+}
+.page-item.active{
+  .page-link{
+    background-color: white !important;
+    border-color: #dee2e6 !important;
+    color: $text-color !important;
+  }
 }

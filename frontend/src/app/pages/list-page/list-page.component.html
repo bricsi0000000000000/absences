@@ -66,7 +66,7 @@
                     Approved
                   </span>
                   <ng-template #notApprovedYet>
-                    <button class="secondary-button" (click)="editAbsence(absence.id)">
+                    <button [disabled]="!this.loggedInEmployee.isAdmin && absence.employeeId != this.loggedInEmployee.id" class="secondary-button" (click)="editAbsence(absence.id)">
                       <i class="bi bi-pencil"></i>
                     </button>
                   </ng-template>
@@ -77,7 +77,7 @@
                 <td>{{ absence.reason | absenceReasonToString }}</td>
                 <td [title]="absence.comment" class="comment">{{ absence.comment }}</td>
                 <td>
-                  <button class="delete-button" (click)="deleteAbsence(absence.id)">
+                  <button [disabled]="!this.loggedInEmployee.isAdmin && absence.employeeId != this.loggedInEmployee.id" class="delete-button" (click)="deleteAbsence(absence.id)">
                     <i class="bi bi-trash"></i>
                   </button>
                 </td>
@@ -118,7 +118,7 @@
       <form [formGroup]="addNewAbsenceFormGroup" (ngSubmit)="addNewAbsence()">
 
         <label>Employee name</label>
-        <input id="employee-name-input" type="text" formControlName="employeeName">
+        <input [attr.disabled]="!this.loggedInEmployee.isAdmin ? true : null" id="employee-name-input" type="text" formControlName="employeeName">
         <div
           *ngIf="addNewAbsenceFormGroup.get('employeeName')?.invalid && addNewAbsenceFormGroup.get('employeeName')?.touched"
           class="error-messages-container">

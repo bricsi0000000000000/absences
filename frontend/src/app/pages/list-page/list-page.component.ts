@@ -4,6 +4,8 @@ import { Absence } from '../../../@api/dto/absence.dto';
 import { GetAbsenceListRequest } from '../../../@api/dto/get-absence-list-request';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AbsenceReasonOptions } from '../../../@api/dto/absence-reason';
+import { CredentialManager } from '../../../@api/credential-manager';
+import { Employee } from 'src/@api/dto/employee.dto';
 
 @Component({
   selector: 'app-list-page',
@@ -26,6 +28,7 @@ export class ListPageComponent implements OnInit {
   public isEditAbsenceStartDateValid: boolean = true;
   public absenceReasons = AbsenceReasonOptions;
   public errorMessage: string = '';
+  public loggedInEmployee!: Employee;
 
   private maxRowsCount: number = 3;
   private startDate: Date = new Date();
@@ -33,8 +36,14 @@ export class ListPageComponent implements OnInit {
   private editingAbsenceId: number = -1;
 
   constructor(private apiService: ApiService,
-    private renderer: Renderer2) {
+    private renderer: Renderer2,
+    private credentialManager: CredentialManager) {
     this.setPageNumberToDefault();
+
+    let loggedInEmployee = this.credentialManager.getEmployee();
+    if(loggedInEmployee){
+      this.loggedInEmployee = loggedInEmployee;
+    }
 
     this.addNewAbsenceFormGroup = new FormGroup({
       employeeName: new FormControl('', [Validators.required]),
@@ -148,7 +157,7 @@ export class ListPageComponent implements OnInit {
         endDate.setDate(endDate.getDate() + 1);
 
         this.addNewAbsenceFormGroup.patchValue({
-          employeeName: '',
+          employeeName: this.loggedInEmployee.name,
           startDate: startDate.toISOString().substring(0, 10),
           endDate: endDate.toISOString().substring(0, 10),
           reason: null,
@@ -182,6 +191,8 @@ export class ListPageComponent implements OnInit {
         this.addNewAbsenceFormGroup.value.endDate,
         parseInt(this.addNewAbsenceFormGroup.value.reason),
         this.addNewAbsenceFormGroup.value.comment);
+
+        absence.employeeId = this.loggedInEmployee.id;
 
       if (this.editingAbsenceId == -1) {
         const response = await this.apiService.createAbsence(absence);

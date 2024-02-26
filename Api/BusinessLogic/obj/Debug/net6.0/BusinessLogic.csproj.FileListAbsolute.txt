@@ -11,3 +11,4 @@ E:\szintezis\leave-times\Api\BusinessLogic\obj\Debug\net6.0\BusinessLogic.csproj
 E:\szintezis\leave-times\Api\BusinessLogic\obj\Debug\net6.0\BusinessLogic.dll
 E:\szintezis\leave-times\Api\BusinessLogic\obj\Debug\net6.0\refint\BusinessLogic.dll
 E:\szintezis\leave-times\Api\BusinessLogic\obj\Debug\net6.0\ref\BusinessLogic.dll
+E:\szintezis\leave-times\Api\BusinessLogic\obj\Debug\net6.0\BusinessLogic.sourcelink.json

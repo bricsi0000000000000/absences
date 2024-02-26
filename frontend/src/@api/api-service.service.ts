@@ -6,11 +6,16 @@ import { Absence } from "./dto/absence.dto";
 import { GetAbsenceListRequest } from "./dto/get-absence-list-request";
 import { GetAbsenceListResponse } from "./dto/get-absence-list-response";
 import { CustomResponse } from "./dto/custom-response";
+import { Employee } from "./dto/employee.dto";
 
 @Injectable()
 export class ApiService {
   constructor(private http: HttpClient) {
 
+  }
+
+  public async login(employee: Employee): Promise<Employee> {
+    return this.callPostApi('employee/login', employee);
   }
 
   public async getAllAbsence(request: GetAbsenceListRequest): Promise<CustomResponse<GetAbsenceListResponse>> {

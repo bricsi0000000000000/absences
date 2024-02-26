@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="login-container">
+    <div class="login-body">
+      <h1>Login</h1>
+
+      <form [formGroup]="loginFormGroup" (ngSubmit)="login()">
+
+        <label>Name</label>
+        <input id="name-input" type="text" formControlName="name">
+        <div
+          *ngIf="loginFormGroup.get('name')?.invalid && loginFormGroup.get('name')?.touched"
+          class="error-messages-container">
+          <div class="error-message">Name is empty</div>
+        </div>
+
+        <button type="submit" class="primary-button">Login</button>
+      </form>
+    </div>
+  </div>
+  
+  <div class="toast-container" #errorMessageToast>
+    {{errorMessage}}
+  </div>
+
+</div>

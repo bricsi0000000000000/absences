@@ -28,3 +28,4 @@ E:\szintezis\leave-times\Api\Api\bin\Debug\net6.0\DataAccess.dll
 E:\szintezis\leave-times\Api\Api\bin\Debug\net6.0\DataModel.dll
 E:\szintezis\leave-times\Api\Api\obj\Debug\net6.0\Api.csproj.AssemblyReference.cache
 E:\szintezis\leave-times\Api\Api\obj\Debug\net6.0\Api.csproj.CopyComplete
+E:\szintezis\leave-times\Api\Api\obj\Debug\net6.0\Api.sourcelink.json
